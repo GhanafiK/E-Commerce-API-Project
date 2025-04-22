@@ -15,10 +15,10 @@ namespace Presentation.Controllers
     public class ProductsController(IServiceManager _serviceManager):ControllerBase
     {
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<ProductDTO>>> GetAllProducts([FromQuery] ProductQueryParams queryParams)
+        public async Task<ActionResult<PaginatedResult<ProductDTO>>> GetAllProducts([FromQuery] ProductQueryParams queryParams)
         {
-            var Products = await _serviceManager.ProductServices.GetAllProductsAsync(queryParams);
-            return Ok(Products);
+            var Result = await _serviceManager.ProductServices.GetAllProductsAsync(queryParams);
+            return Ok(Result);
         }
 
         [HttpGet("{id:int}")]

@@ -1,6 +1,7 @@
 ﻿using DomainLayer.Contracts;
 using DomainLayer.Models;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.VisualBasic;
 using Persistence.Data;
 using System;
 using System.Collections.Generic;
@@ -31,7 +32,12 @@ namespace Persistence.Repositories
         public async Task<TEntity?> GetByIdAsync(ISpecifications<TEntity, TKey> specifications)
         {
             return await SpecificationEvaluator.CreateQuery(_dbContext.Set<TEntity>(), specifications).FirstOrDefaultAsync();
-        } 
+        }
+
+        public async Task<int> GetCountAsync(ISpecifications<TEntity, TKey> specifications)
+        {
+            return await SpecificationEvaluator.CreateQuery(_dbContext.Set<TEntity>(), specifications).CountAsync();
+        }
         #endregion
     }
 }

@@ -42,5 +42,20 @@ namespace Service.Specifications
             OrderByDesc=OrderByDescExpression;
         }
         #endregion
+
+        #region Pagination
+        public int Skip { get; private set; }
+
+        public int Take { get; private set; }
+
+        public bool IsPaginated { get; set; } 
+
+        protected void ApplyPagination(int PageSize,int PageIndex)
+        {
+            IsPaginated = true;
+            Skip = (PageIndex - 1) * PageSize;
+            Take=PageSize;
+        }
+        #endregion
     }
 }
