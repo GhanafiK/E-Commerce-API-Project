@@ -18,6 +18,12 @@ namespace Persistence
             if(specifications.criteria is not null)
                 Query=Query.Where(specifications.criteria); 
 
+            if(specifications.OrderBy is not null) 
+                Query=Query.OrderBy(specifications.OrderBy);
+
+            if(specifications.OrderByDesc is not null) 
+                Query=Query.OrderByDescending(specifications.OrderByDesc);
+
             if(specifications.IncludeExpressions is not null && specifications.IncludeExpressions.Count() > 0)
             {
                 //foreach (var expression in specifications.IncludeExpressions)
