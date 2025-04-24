@@ -1,5 +1,6 @@
 
 using DomainLayer.Contracts;
+using E_Commerce.Web.CustomMiddleWares;
 using Microsoft.EntityFrameworkCore;
 using Persistence;
 using Persistence.Data;
@@ -47,6 +48,8 @@ namespace E_Commerce.Web
             catch (Exception ex){ }
             #region Configure the HTTP request pipeline
 
+            // Custom Exception MiddleWare
+            app.UseMiddleware<CustomExceptionHandlerMiddleWare>();
             if (app.Environment.IsDevelopment())
             {
                 app.UseSwagger();
