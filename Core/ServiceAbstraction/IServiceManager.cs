@@ -9,5 +9,6 @@ namespace ServiceAbstraction
     public interface IServiceManager
     {
         public IProductServices ProductServices { get;}
+        public IBasketService BasketService { get;}
     }
 }
