@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Shared.DataTransfareObjects
+namespace Shared.DataTransfareObjects.ProductModuleDtos
 {
     public class BrandDTO
     {

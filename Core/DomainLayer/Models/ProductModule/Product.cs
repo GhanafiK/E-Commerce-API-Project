@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace DomainLayer.Models
+namespace DomainLayer.Models.ProductModule
 {
-    public class Product:BaseEntity<int>
+    public class Product : BaseEntity<int>
     {
         public string Name { get; set; } = null!;
         public string Description { get; set; } = null!;
@@ -14,7 +14,7 @@ namespace DomainLayer.Models
         public decimal Price { get; set; }
 
         public ProductBrand productBrand { get; set; }
-        public int BrandId { get; set; } 
+        public int BrandId { get; set; }
         public ProductType productType { get; set; }
         public int TypeId { get; set; }
     }
