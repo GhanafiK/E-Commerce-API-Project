@@ -32,15 +32,6 @@ namespace E_Commerce.Web.CustomMiddleWares
 
         private static async Task HandleExceptionAsync(HttpContext httpContext, Exception ex)
         {
-            // set status code for Response
-            //httpContext.Response.StatusCode = 500;
-            //httpContext.Response.StatusCode=(int) HttpStatusCode.InternalServerError;
-            httpContext.Response.StatusCode = ex switch
-            {
-                NotFoundException => StatusCodes.Status404NotFound,
-                _ => StatusCodes.Status500InternalServerError
-            };
-
             // set Content Type For Response
             //httpContext.Response.ContentType = "application/json";
 
@@ -51,12 +42,30 @@ namespace E_Commerce.Web.CustomMiddleWares
                 ErrorMessage = ex.Message
             };
 
+            // set status code for Response
+            //httpContext.Response.StatusCode = 500;
+            //httpContext.Response.StatusCode=(int) HttpStatusCode.InternalServerError;
+            httpContext.Response.StatusCode = ex switch
+            {
+                NotFoundException => StatusCodes.Status404NotFound,
+                UnAuthenticatedException=>StatusCodes.Status401Unauthorized,
+                BadRequestException badRequestException=> GetBadRequestErrors(badRequestException,Response),
+                _ => StatusCodes.Status500InternalServerError
+            };
+
             // return object as json
             //var ResponseToReturn=JsonSerializer.Serialize(Response);
             //await httpContext.Response.WriteAsync(ResponseToReturn);
 
             await httpContext.Response.WriteAsJsonAsync(Response); // this make ContentType = "application/json"
                                                                    // make json serialization and write async
+        }
+
+        //add errors that cum with bad request exception to the response and return the status code
+        private static int GetBadRequestErrors(BadRequestException badRequestException, ErrorToReturn response)
+        {
+            response.Errors=badRequestException.Errors;
+            return StatusCodes.Status400BadRequest;
         }
 
         private static async Task HandleNotFoundEndPointAsync(HttpContext httpContext)
