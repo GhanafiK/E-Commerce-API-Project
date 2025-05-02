@@ -79,8 +79,8 @@ namespace Service
             var creds = new SigningCredentials(key, SecurityAlgorithms.HmacSha256);
 
             var Token = new JwtSecurityToken(
-                issuer: _configuration.GetSection("JWTOptions")["Issure"],
-                audience: _configuration.GetSection("JWTOptions")["Audiance"],
+                issuer: _configuration.GetSection("JWTOptions")["Issuer"],
+                audience: _configuration.GetSection("JWTOptions")["Audience"],
                 claims: Claims,
                 expires: DateTime.Now.AddHours(1),
                 signingCredentials: creds

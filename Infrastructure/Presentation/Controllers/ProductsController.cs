@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using ServiceAbstraction;
 using Shared;
 using Shared.DataTransfareObjects;
@@ -11,6 +12,7 @@ using System.Threading.Tasks;
 
 namespace Presentation.Controllers
 {
+    [Authorize(Roles ="Admin")]
     public class ProductsController(IServiceManager _serviceManager): ApiBaseController
     {
         [HttpGet]
