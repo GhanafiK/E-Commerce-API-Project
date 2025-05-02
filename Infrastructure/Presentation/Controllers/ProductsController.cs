@@ -11,9 +11,7 @@ using System.Threading.Tasks;
 
 namespace Presentation.Controllers
 {
-    [ApiController]
-    [Route("api/[Controller]")]
-    public class ProductsController(IServiceManager _serviceManager):ControllerBase
+    public class ProductsController(IServiceManager _serviceManager): ApiBaseController
     {
         [HttpGet]
         public async Task<ActionResult<PaginatedResult<ProductDTO>>> GetAllProducts([FromQuery] ProductQueryParams queryParams)
