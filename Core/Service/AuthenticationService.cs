@@ -21,7 +21,7 @@ namespace Service
     {
         public async Task<bool> CheckEmailAsync(string Email)
         {
-            var User=await _userManager.FindByNameAsync(Email);
+            var User=await _userManager.FindByEmailAsync(Email);
             return User is not null;
         }
 
