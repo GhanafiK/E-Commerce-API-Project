@@ -9,11 +9,15 @@ namespace ServiceAbstraction
 {
     public interface IOrderService
     {
-        //Creating Order Will Take Basket Id , Shipping Address , Delivery Method Id , Customer Email
-        //And Return Order Details
-        //(Id , UserName , OrderDate , Items (Product Name - Picture Url - Price - Quantity) , Address , Delivery Method Name ,
-        //Order Status Value , Sub Total , Total Price  )
+        Task<OrderToReturnDto> CreateOrderAsync(OrderDto order,string Email);
 
-        Task<OrderToReturnDto> CreateOrder(OrderDto order,string Email);
+        //Get Delivery Methods
+        Task<IEnumerable<DeliveryMethodDto>> GetDeliveryMethodsAsync();
+
+        //Get All Orders
+        Task<IEnumerable<OrderToReturnDto>> GetAllOrderAsync(string Email);
+
+        // Get Order By Id
+        Task<OrderToReturnDto> GetOrderByIdAsync(Guid Id);
     }
 }
